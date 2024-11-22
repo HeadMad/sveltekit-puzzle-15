@@ -87,6 +87,7 @@
     imageSrc = src;
     isNumbers = false;
     halfGap = 1;
+    gameRatio = 1;
     hideMenu(isImageMenu);
   }
 
@@ -372,7 +373,7 @@
     width: var(--cell-size);
     height: var(--cell-size);
     font-size: var(--font-size);
-    transition: 0.3s;
+    transition: .2s;
   }
 
   .cell::before {
