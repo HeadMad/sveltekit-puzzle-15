@@ -202,7 +202,7 @@
 
     <div class="menu-line">
       <small>Отступ</small>
-      <input type="range" bind:value={halfGap} min="0" max="10" step=".5" />
+      <input type="range" bind:value={halfGap} min="0" max="5" step=".5" />
     </div>
   </div>
 {/snippet}
@@ -373,7 +373,7 @@
     width: var(--cell-size);
     height: var(--cell-size);
     font-size: var(--font-size);
-    transition: .2s;
+    transition: .1s;
   }
 
   .cell::before {
@@ -383,12 +383,13 @@
     top: var(--half-gap);
     right: var(--half-gap);
     bottom: var(--half-gap);
-    background-color: #ddd;
+    background-color: #000;
     border-radius: calc(var(--half-gap) * 2);
     cursor: pointer;
   }
 
   .image > .cell::before {
+    background-color: #fff;
     background-image: var(--image-url);
     background-size: var(--game-width) var(--game-height);
     background-position-x: calc(
@@ -410,6 +411,7 @@
 
   .numbers > .cell::after {
     content: attr(data-n);
+    color: #fff;
     position: relative;
     margin: auto;
   }
