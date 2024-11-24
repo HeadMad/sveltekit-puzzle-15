@@ -28,12 +28,26 @@
     "/4.webp",
   ];
 
+  let WebApp;
+
   $effect(() => {
+    WebApp = Telegram.WebApp;
+    WebApp.ready();
+    WebApp.requestFullscreen();
+
     puzzle.oncomplete(() => {
       t.stop();
       isStarted = false;
       isDone = true;
       isFreeze = true;
+    });
+
+    WebApp.onEvent("homeScreenAdded", () => {
+      WebApp.showPopup({
+        title: "Поздравляем!",
+        message: "Приложение добавлено на ваш экран",
+        buttons: [{ type: "ok",text: "Закрыть" }],
+      });
     });
   });
   
@@ -118,6 +132,10 @@
   }
 </script>
 
+<svelte:head>
+  <script src="https://telegram.org/js/telegram-web-app.js?56"></script>
+</svelte:head>
+
 <main>
   <div class="panel">
     <div class="timer" onclick={pause} class:paused={isPaused}>
@@ -194,6 +212,7 @@
 
 {#snippet settingsMenu()}
   <div class="menu settings" class:open={isSettingsMenu}>
+    <button onclick={() => Telegram.WebApp.addToHomeScreen()}>Добавить на экран</button>
     <div class="flex-center">
       <button class="level-button" onclick={() => changeLevel(-1)}>-</button>
       <span class="level-lable">{level} × {level}</span>
