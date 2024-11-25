@@ -34,6 +34,7 @@
     WebApp = Telegram.WebApp;
     WebApp.ready();
     WebApp.requestFullscreen();
+    WebApp.disableVerticalSwipes();
 
     puzzle.oncomplete(() => {
       t.stop();
