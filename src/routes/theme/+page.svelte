@@ -10,5 +10,5 @@
 </svelte:head>
 <h2>Theme Params:</h2>
 <pre>
-  {JSON.stringify(Object.entries(TWA?.themeParams ?? {}).map(([param, value]) => '--' + param.replaceAll('_', '-') + ': var(--tg-theme-' + param.replaceAll('_', '-') + ', ' + value + ')'), null, 2)}
+  {Object.entries(TWA?.themeParams ?? {}).map(([param, value]) => '--' + param.replaceAll('_', '-') + ': var(--tg-theme-' + param.replaceAll('_', '-') + ', ' + value + ')').join('\n')}
 </pre>
