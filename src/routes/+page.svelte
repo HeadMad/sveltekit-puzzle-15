@@ -134,7 +134,7 @@
   }
 </script>
 
-<svelte:head>
+<!-- <svelte:head> -->
   <!-- <script src="https://telegram.org/js/telegram-web-app.js?56"></script>
 </svelte:head> -->
 
