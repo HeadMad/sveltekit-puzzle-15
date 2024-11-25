@@ -31,11 +31,11 @@
   let WebApp;
 
   $effect(() => {
-    // WebApp = Telegram.WebApp;
-    // WebApp.ready();
-    // WebApp.requestFullscreen();
-    // WebApp.lockOrientation();
-    // WebApp.disableVerticalSwipes();
+    WebApp = Telegram.WebApp;
+    WebApp.ready();
+    WebApp.requestFullscreen();
+    WebApp.lockOrientation();
+    WebApp.disableVerticalSwipes();
 
     puzzle.oncomplete(() => {
       t.stop();
@@ -134,9 +134,9 @@
   }
 </script>
 
-<!-- <svelte:head> -->
-  <!-- <script src="https://telegram.org/js/telegram-web-app.js?56"></script>
-</svelte:head> -->
+<svelte:head>
+  <script src="https://telegram.org/js/telegram-web-app.js?56"></script>
+</svelte:head>
 
 <main>
   <div class="panel">
@@ -213,8 +213,8 @@
 </main>
 
 {#snippet settingsMenu()}
-<span class=theme></span>
-  <div class="menu settings" class:open={isSettingsMenu}>
+<div class="menu settings" class:open={isSettingsMenu}>
+    <span class=theme></span>
     <button onclick={() => Telegram.WebApp.addToHomeScreen()}>Добавить на экран</button>
     <div class="flex-center">
       <button class="level-button" onclick={() => changeLevel(-1)}>-</button>
@@ -245,7 +245,7 @@
 
 <style>
   .theme::before {
-    content: var(--tg-color-scheme)
+    content:  var(--tg-color-scheme);
   }
   .flex-center {
     display: flex;
