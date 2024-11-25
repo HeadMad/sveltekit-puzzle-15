@@ -31,18 +31,20 @@
   let WebApp;
 
   $effect(() => {
-    WebApp = Telegram.WebApp;
-    WebApp.ready();
-    WebApp.requestFullscreen();
-    WebApp.lockOrientation();
-    WebApp.disableVerticalSwipes();
-
     puzzle.oncomplete(() => {
       t.stop();
       isStarted = false;
       isDone = true;
       isFreeze = true;
     });
+
+    WebApp = Telegram.WebApp;
+    WebApp.ready();
+    WebApp.requestFullscreen();
+    WebApp.lockOrientation();
+    WebApp.disableVerticalSwipes();
+
+    
 
     WebApp.onEvent("homeScreenAdded", () => {
       WebApp.showPopup({
@@ -214,8 +216,7 @@
 
 {#snippet settingsMenu()}
 <div class="menu settings" class:open={isSettingsMenu}>
-    <span class=theme></span>
-    <button onclick={() => Telegram.WebApp.addToHomeScreen()}>Добавить на экран</button>
+    <button onclick={() => Telegram.WebApp.addToHomeScreen()}>На экран</button>
     <div class="flex-center">
       <button class="level-button" onclick={() => changeLevel(-1)}>-</button>
       <span class="level-lable">{level} × {level}</span>
@@ -244,9 +245,7 @@
 {/snippet}
 
 <style>
-  .theme::before {
-    content:  var(--tg-color-scheme);
-  }
+
   .flex-center {
     display: flex;
     align-items: center;
@@ -289,6 +288,10 @@
     gap: 15px;
   }
 
+  .level-button {
+    padding: 0;
+  }
+
   .menu.image {
     flex-direction: column;
     gap: 10px;
@@ -311,6 +314,7 @@
     cursor: pointer;
     text-align: center;
     line-height: 46px;
+    padding: 0;
   }
 
   .preview :global(svg) {
@@ -368,6 +372,7 @@
     cursor: pointer;
     display: flex;
     align-items: center;
+    color: var(--section-header-text-color);
     gap: 10px;
   }
 
@@ -380,7 +385,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: var(--viewport-stable-height);
   }
   .game {
     position: relative;
@@ -408,8 +413,8 @@
     top: var(--half-gap);
     right: var(--half-gap);
     bottom: var(--half-gap);
-    background-color: #000;
     border-radius: calc(var(--half-gap) * 2);
+    background-color: var(--button-color);
     cursor: pointer;
   }
 
@@ -434,9 +439,14 @@
     opacity: 1;
   }
 
+  .image.done > .cell::before {
+    transition: 1s 0.2s;
+    --half-gap: 0px;
+  }
+
   .numbers > .cell::after {
     content: attr(data-n);
-    color: #fff;
+    color: var(--button-text-color);
     position: relative;
     margin: auto;
   }

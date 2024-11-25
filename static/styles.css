@@ -1,33 +1,64 @@
 :root {
 
-  --accent-text-color: var(--tg-theme-accent-text-color, #168acd);
-  --bg-color: var(--tg-theme-bg-color, #ffffff);
-  --bottom-bar-bg-color: var(--tg-theme-bottom-bar-bg-color, #ffffff);
-  --button-color: var(--tg-theme-button-color, #40a7e3);
-  --button-text-color: var(--tg-theme-button-text-color, #ffffff);
-  --destructive-text-color: var(--tg-theme-destructive-text-color, #d14e4e);
-  --header-bg-color: var(--tg-theme-header-bg-color, #ffffff);
-  --hint-color: var(--tg-theme-hint-color, #999999);
-  --link-color: var(--tg-theme-link-color, #168acd);
-  --secondary-bg-color: var(--tg-theme-secondary-bg-color, #f1f1f1);
-  --section-bg-color: var(--tg-theme-section-bg-color, #ffffff);
-  --section-header-text-color: var(--tg-theme-section-header-text-color, #168acd);
-  --section-separator-color: var(--tg-theme-section-separator-color, #e7e7e7);
-  --subtitle-text-color: var(--tg-theme-subtitle-text-color, #999999);
-  --text-color: var(--tg-theme-text-color, #000000);
+  /* Color scheme */  
+--color-scheme: var(--tg-color-scheme, "light");
+--viewport-height: var(--tg-viewport-height, 100vh);
+--viewport-stable-height: var(--tg-viewport-stable-height, 100vh);
 
+/* Safe area inset */
+--safe-area-inset-top: var(--tg-safe-area-inset-top, 0);
+--safe-area-inset-bottom: var(--tg-safe-area-inset-bottom, 0);
+--safe-area-inset-left: var(--tg-safe-area-inset-left, 0);
+--safe-area-inset-right: var(--tg-safe-area-inset-right, 0);
 
+/* Content safe area inset */
+--content-safe-area-inset-top: var(--tg-content-safe-area-inset-top, 0);
+--content-safe-area-inset-bottom: var(--tg-content-safe-area-inset-bottom, 0);
+--content-safe-area-inset-left: var(--tg-content-safe-area-inset-left, 0);
+--content-safe-area-inset-right: var(--tg-content-safe-area-inset-right, 0);
 
-
-  font-family: 'Segoe UI', Roboto, 'Open Sans', 'Helvetica Neue', Arial, -apple-system, BlinkMacSystemFont, Oxygen, Ubuntu,
-    Cantarell, sans-serif;
-
-
+/* Theme Params */
+--accent-text-color: var(--tg-theme-accent-text-color, #168acd);
+--bg-color: var(--tg-theme-bg-color, #ffffff);
+--bottom-bar-bg-color: var(--tg-theme-bottom-bar-bg-color, #ffffff);
+--button-color: var(--tg-theme-button-color, #40a7e3);
+--button-text-color: var(--tg-theme-button-text-color, #ffffff);
+--destructive-text-color: var(--tg-theme-destructive-text-color, #d14e4e);
+--header-bg-color: var(--tg-theme-header-bg-color, #ffffff);
+--hint-color: var(--tg-theme-hint-color, #999999);
+--link-color: var(--tg-theme-link-color, #168acd);
+--secondary-bg-color: var(--tg-theme-secondary-bg-color, #f1f1f1);
+--section-bg-color: var(--tg-theme-section-bg-color, #ffffff);
+--section-header-text-color: var(--tg-theme-section-header-text-color, #168acd);
+--section-separator-color: var(--tg-theme-section-separator-color, #e7e7e7);
+--subtitle-text-color: var(--tg-theme-subtitle-text-color, #999999);
+--text-color: var(--tg-theme-text-color, #000000);
 
 }
 
 
 body {
+  
+  font-family: 'Segoe UI', Roboto, 'Open Sans', 'Helvetica Neue', Arial, -apple-system, BlinkMacSystemFont, Oxygen, Ubuntu,
+    Cantarell, sans-serif;
+  color: var(--text-color);
   margin: 0;
-
+  background-color: var(--bg-color);
+  accent-color: var(--accent-text-color);
 }
+
+button {
+  background-color: var(--button-color);
+  color: var(--button-text-color);
+  border: none;
+  border-radius: .3em;
+  padding: .5em 1em;
+  cursor: pointer;
+  font-size: 1em;
+  /* font-weight: bold; */
+}
+
+a {
+  color: var(--link-color);
+}
+
