@@ -441,7 +441,7 @@
 
   .image.done > .cell::before {
     transition: 1s 0.2s;
-    --half-gap: 0px;
+    --half-gap: -.1px;
   }
 
   .numbers > .cell::after {
