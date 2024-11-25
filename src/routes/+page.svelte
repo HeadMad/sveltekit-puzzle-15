@@ -31,11 +31,11 @@
   let WebApp;
 
   $effect(() => {
-    WebApp = Telegram.WebApp;
-    WebApp.ready();
-    WebApp.requestFullscreen();
-    WebApp.lockOrientation();
-    WebApp.disableVerticalSwipes();
+    // WebApp = Telegram.WebApp;
+    // WebApp.ready();
+    // WebApp.requestFullscreen();
+    // WebApp.lockOrientation();
+    // WebApp.disableVerticalSwipes();
 
     puzzle.oncomplete(() => {
       t.stop();
