@@ -1,9 +1,10 @@
 export default function (cells) {
+  console.log(cells);
 
   let count = cells.length;
   let level = Math.sqrt(count);
 
-  let complete;
+  let completeHandler;
 
   function click(index) {
     const iPrs = index;
@@ -35,106 +36,43 @@ export default function (cells) {
     }
 
     cells[iEmp] = pPrs;
-
-    if (typeof complete === 'function' && cells.every((p, i) => p === i))
-      complete();
+    if (cells.every((p, i) => p === i) && typeof completeHandler === 'function')
+      completeHandler();
   }
 
-  function shuffle(handler) {
+
+  function shuffle() {
     cells.sort(() => Math.random() - 0.5);
-    
-    if (typeof handler === 'function')
-      handler();
 
-    if (isSolvable(cells))
-      return;
-    console.log('!solvable');
-    // [cells[0], cells[1]] = [cells[1], cells[0]];
+    if (!isSolvable())
+      [cells[0], cells[1]] = [cells[1], cells[0]];
   }
 
-  function reset(handler) {
+
+  function reset() {
     cells.sort((a, b) => a - b);
-    if (typeof handler === 'function')
-      handler();
   }
+
 
   function oncomplete(handler) {
-    complete = handler;
+    if (typeof handler === 'function')
+      completeHandler = handler;
   }
 
 
-  function isSolvable(order) {
-    let parity = 0;
-    let gridWidth = Math.sqrt(order.length);
-    let row = 0; // the current row we are on
-    let blankRow = 0; // the row with the blank tile
-  
-    for (let i = 0; i < order.length; i++) {
-      if (i % gridWidth == 0) { // advance to next row
-        row++;
-      }
-      if (order[i] == order.length - 1) { // the blank tile
-        blankRow = row; // save the row on which encountered
-        continue;
-      }
-      for (let j = i + 1; j < order.length; j++) {
-        if (order[i] > order[j] && order[j] !== order.length - 1) {
-          parity++;
-        }
-      }
-    }
-  
-    if (gridWidth % 2 == 0) { // even grid
-      if (blankRow % 2 == 0) { // blank on odd row; counting from bottom
-        return parity % 2 == 0;
-      } else { // blank on even row; counting from bottom
-        return parity % 2 != 0;
-      }
-    } else { // odd grid
-      return parity % 2 == 0;
-    }
-  
-  
-    //////////////////////////////
-    // const level = Math.sqrt(order.length);
-    // // проверка на нерешаемость пятнашек Лойда
-    // let sum = order.reduce((sum, cur, i) => {
-    //   // если пустая ячейка и если уровень чётный,
-    //   // вычисляем номер её ряда и прибавляем к счетчику
-    //   if (cur === (order.length - 1) && level % 2 === 0) {
-    //     let row = Math.ceil((i + 1) / level);
-    //     sum += row;
-    //     return sum;
-    //   }
-  
-    //   for (let n = i + 1; n < order.length; n++) {
-    //     let num = order[n];
-    //     if (num !== (order.length - 1) && cur > num) sum++;
-    //   }
-    //   return sum;
-    // }, 0);
-  
-    // return sum % 2 === 0;
-    //////////////
-    // for (let kDisorder = 0, i = 1; i < (order.length-1); i++)
-    //   for (var j = i-1; j >= 0; j--)
-    //     if (order[j] > order[i])
-    //       kDisorder++;
-    //   return !(kDisorder % 2); 
-    /////////////
-  
-    // let iEmp = order.indexOf(count - 1);
-    // let arr = order.toSpliced(iEmp, 1);
-  
-    // let sum = arr.reduce((sum, cur, i, arr) => {
-    //   if (!i) return sum;
-  
-    //   return sum + (cur > arr[i - 1]);
-    // }, 0);
-  
-    // console.log(arr, sum)
-  
-    // return sum % 2 === 0;
+  // проверка на нерешаемость пятнашек Лойда
+  function isSolvable() {
+    const iEmp = count - 1;
+    let sum = cells.toSpliced(iEmp, 1).reduce((sum, cur, i, arr) => {
+      for (let n = i + 1; n < arr.length; n++) 
+        if (cur > cells[n]) sum++;
+      return sum;
+    }, 0);
+
+    if (level % 2 === 0)
+      sum += Math.floor((cells[iEmp]) / level) + 1;
+
+    return sum % 2 === 0;
   }
 
 
@@ -152,6 +90,9 @@ export default function (cells) {
           empty: i === count - 1
         };
       }
+    },
+    getState() {
+      return [...cells];
     }
   };
 };

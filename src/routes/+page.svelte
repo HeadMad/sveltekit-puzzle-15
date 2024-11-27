@@ -4,7 +4,12 @@
 
   let t = Timer();
   let level = $state(3);
-  let puzzle = $derived(Puzzle(level));
+  let state = $state(Array.from({ length: level * level }, (_, i) => i));
+
+  $effect(() => {
+    state = Array.from({ length: level * level }, (_, i) => i);
+  });
+  let puzzle = $derived(Puzzle(state));
 
   let halfGap = $state(3);
   let imageSrc = $state("/4.webp");
@@ -60,6 +65,9 @@
 
   function onCellClick(index) {
     if (isFreeze) return;
+
+    console.log(puzzle.getState());
+
     if (isStarted) return puzzle.click(index);
 
     isStarted = true;
